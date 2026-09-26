@@ -1,0 +1,22 @@
+{
+  "name": "securebank",
+  "version": "1.0.0",
+  "description": "SecureBank Intentionally Vulnerable Application",
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "test:security": "npm run test:security -w backend",
+    "test:functional": "npm run test:functional -w backend"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}

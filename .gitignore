@@ -1,0 +1,23 @@
+# Environments
+node_modules/
+dist/
+build/
+coverage/
+
+# Database
+data/
+*.db
+*.sqlite
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
