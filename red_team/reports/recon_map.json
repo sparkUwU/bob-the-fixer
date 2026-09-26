@@ -1,0 +1,19 @@
+{
+  "target": "http://127.0.0.1:5000",
+  "endpoints": [
+    {
+      "path": "/api/transactions/2",
+      "method": "GET",
+      "auth_header": "X-User-ID",
+      "description": "Fetch user transaction by ID",
+      "category": "IDOR"
+    },
+    {
+      "path": "/api/transactions/search?q=deposit",
+      "method": "GET",
+      "auth_header": null,
+      "description": "Search transactions by description query",
+      "category": "SQLI"
+    }
+  ]
+}

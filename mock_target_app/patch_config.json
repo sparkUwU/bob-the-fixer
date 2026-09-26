@@ -1,0 +1,5 @@
+{
+  "IDOR_FIXED": true,
+  "SQLI_FIXED": true,
+  "XSS_FIXED": false
+}

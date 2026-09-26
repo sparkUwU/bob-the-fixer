@@ -1,0 +1,8 @@
+{
+  "vulnerability_id": "VULN-001",
+  "validation_status": "CONFIRMED",
+  "security_impact_verified": true,
+  "reproduction_log": "Reproduction request to http://127.0.0.1:5000/api/transactions/2 returned HTTP 200.",
+  "reasoning": "Independently verified that User 101 received User 102's sensitive transaction data.",
+  "validated_at": "2026-09-26T20:14:31.533413Z"
+}

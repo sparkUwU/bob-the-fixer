@@ -1,0 +1,100 @@
+## Goal Description
+This plan establishes the step-by-step setup and execution strategy for **IBM Bob 2.0 IDE**, meeting all criteria of the **IBM 2.0 Hackathon Challenge**:
+- **Problem Solved**: Manual security auditing, vulnerability reproduction, root-cause investigation, and patch verification are slow, error-prone, and involve heavy manual rework.
+- **Workflow Improved**: Application Maintenance & Release Security (DevSecOps).
+- **IBM Bob 2.0 Features Demonstrated**: Agent Mode, Parallel Tasks, Subagents, Repository Document Understanding, and Closed-Loop Iterative Verification.
+- **Target Application**: Node.js + Express (`SecureBank`).
+
+The deterministic Python core built in Phase 2 is **100% complete and verified**. Now, we wire Bob 2.0 as the intelligent orchestrator that calls these modules, parallelizes Red Team subagents, validates evidence via the Security Judge, applies Node.js/Express patches via Blue Team, and runs verification loops.
+
+---
+
+## User Review Required
+> [!IMPORTANT]
+> **Bobcoin Conservation**: We will configure Bob to invoke the local Python agent engines (`python pipeline_runner.py` or modular scripts) for execution and heavy processing, reserving Bobcoins for high-level reasoning, parallel subagent coordination, and live demo presentation (~25-30 Bobcoins total).
+>
+> **Node.js/Express Target**: Blue Team patchers will target Node.js/Express syntax in `target-app/` (e.g. injecting `express-validator`, parameterized SQL in `sqlite3`/`pg`, and ownership checks in Express route handlers).
+
+---
+
+## Open Questions
+> [!NOTE]
+> 1. In your IBM Bob 2.0 IDE environment, do you have custom subagent prompts enabled in `.bob/agents/` or via Bob's slash command menu?
+> 2. Are you ready to save the step-by-step setup guide to `docs/bob_ide_setup_guide.md`?
+
+---
+
+## Proposed Changes
+
+### Component 1: IBM Bob 2.0 Subagent & Workflow Configuration (`.bob/` & `docs/`)
+
+#### [NEW] `c:\Users\MRINMOY\Desktop\AI projects\confusion\docs\bob_ide_setup_guide.md`
+Step-by-step manual and configuration guide to set up IBM Bob 2.0 IDE for the live hackathon demonstration.
+
+#### [NEW] `c:\Users\MRINMOY\Desktop\AI projects\confusion\.bob\agents\recon_agent.md`
+Prompt and tool mapping for Bob Recon Subagent (reads Node.js Express routes and Swagger/API specs).
+
+#### [NEW] `c:\Users\MRINMOY\Desktop\AI projects\confusion\.bob\agents\red_team_agent.md`
+Prompt and tool mapping for Bob Red Team Subagent (launches parallel Auth, IDOR, SQLi, XSS, and Upload exploit subagents).
+
+#### [NEW] `c:\Users\MRINMOY\Desktop\AI projects\confusion\.bob\agents\security_judge_agent.md`
+Prompt and tool mapping for Bob Security Judge Subagent (reproduces findings independently and filters false positives).
+
+#### [NEW] `c:\Users\MRINMOY\Desktop\AI projects\confusion\.bob\agents\blue_team_agent.md`
+Prompt and tool mapping for Bob Blue Team Subagent (patches Node.js/Express JavaScript/TypeScript files).
+
+#### [NEW] `c:\Users\MRINMOY\Desktop\AI projects\confusion\.bob\agents\verifier_agent.md`
+Prompt and tool mapping for Bob Verification Subagent (runs original exploits, `npm test`, and regression suites).
+
+---
+
+### Component 2: Node.js / Express Blue Team Patching Module (`blue-team/`)
+
+#### [MODIFY] `c:\Users\MRINMOY\Desktop\AI projects\confusion\blue_team\patches\patch_agent.py`
+Add Node.js/Express patch handlers that directly update JavaScript/TypeScript route files:
+- **IDOR (Express)**: Injects `if (req.params.id !== req.user.id) return res.status(403).json({error: "Forbidden"});`
+- **SQLi (Node.js)**: Replaces template string SQL queries with parameterized db queries (`db.get('SELECT * FROM transactions WHERE desc = ?', [query])`).
+- **XSS (Node.js)**: Injects `escape-html` or `validator.escape()`.
+- **Upload (Express)**: Injects file extension whitelist validation.
+- **Admin Auth (Express)**: Injects `checkRole('ADMIN')` middleware.
+
+---
+
+### Component 3: Hackathon Impact Metrics & Demonstration Script (`docs/`)
+
+#### [NEW] `c:\Users\MRINMOY\Desktop\AI projects\confusion\docs\hackathon_demo_script.md`
+Complete script for the hackathon presentation showing "Before (Manual Effort: 4 hours, high error rate)" vs "After (Bob Autonomous Loop: 90 seconds, 0 false positives)".
+
+---
+
+## Step-by-Step IBM Bob 2.0 IDE Setup Guide
+
+### Step 1: Prepare the Workspace in Bob 2.0 IDE
+1. Open IBM Bob 2.0 IDE and open the workspace folder `c:\Users\MRINMOY\Desktop\AI projects\confusion`.
+2. When your teammate pushes the Node.js/Express `SecureBank` target app, place it in `c:\Users\MRINMOY\Desktop\AI projects\confusion\target-app`.
+3. Run `npm install` inside `target-app/` and verify the app starts (`npm start` or `node server.js`).
+
+### Step 2: Configure Bob 2.0 Subagent Delegation
+In Bob 2.0 IDE, define the 5 primary subagents using Bob's **Agent Mode**:
+- 🔎 **Recon Agent**: Scans Express routes in `target-app/server.js` or `target-app/routes/`.
+- 🔴 **Red Team Subagents**: Trigger parallel subagent tasks for IDOR, SQLi, and Auth testing.
+- ⚖️ **Security Judge Subagent**: Executes `python security_judge/validation/judge_engine.py`.
+- 🔵 **Blue Team Subagent**: Modifies vulnerable Express routes and generates Jest/Supertest regression tests.
+- 🧪 **Verification Subagent**: Executes `python verifier/verification_engine.py` and runs `npm test`.
+
+### Step 3: Execute the Autonomous Loop in Bob 2.0
+Prompt Bob in **Agent Mode**:
+> *"Bob, initiate an Adversarial DevSecOps cycle on the Node.js target app in `./target-app`. Run parallel Recon and Red Team subagents to discover vulnerabilities, validate them with the Security Judge, apply Blue Team patches to Express controllers, verify fixes, and attempt adaptive re-attacks."*
+
+---
+
+## Verification Plan
+
+### Automated Tests
+1. **Mock Test Baseline**: Run `python pipeline_runner.py` to ensure local Python engine remains green.
+2. **Node.js Express Patch Test**: Run `python -m unittest` or test script verifying Node.js route patch regex transformers.
+3. **Bob Orchestration Test**: Trigger Bob in Agent Mode and observe parallel subagent task creation and report generation.
+
+### Manual Verification
+1. Verify Bob 2.0 UI displays subagent delegation trees and parallel task execution graphs.
+2. Confirm Bobcoin usage stays under the 30 Bobcoin target budget during the full test run.

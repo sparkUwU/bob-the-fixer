@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RiskReport",
+  "type": "object",
+  "properties": {
+    "vulnerability_id": { "type": "string" },
+    "priority": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] },
+    "risk_score": { "type": "number", "minimum": 0.0, "maximum": 10.0 },
+    "exploitability": { "type": "string" },
+    "business_impact": { "type": "string" },
+    "required_privilege": { "type": "string" },
+    "remediation_urgency": { "type": "string" }
+  },
+  "required": ["vulnerability_id", "priority", "risk_score", "exploitability", "business_impact", "required_privilege", "remediation_urgency"]
+}

@@ -1,0 +1,9 @@
+{
+  "vulnerability_id": "VULN-001",
+  "priority": "HIGH",
+  "risk_score": 8.5,
+  "exploitability": "High - Requires minimal authorization header manipulation",
+  "business_impact": "High - Unauthorized exposure of user financial transactions",
+  "required_privilege": "Authenticated Low-Privilege User",
+  "remediation_urgency": "Immediate (24-48 hrs)"
+}

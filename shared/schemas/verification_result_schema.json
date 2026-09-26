@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VerificationResult",
+  "type": "object",
+  "properties": {
+    "vulnerability_id": { "type": "string" },
+    "original_exploit": { "type": "string", "enum": ["BLOCKED", "SUCCESSFUL"] },
+    "regression_test": { "type": "string", "enum": ["PASSED", "FAILED"] },
+    "legitimate_behavior": { "type": "string", "enum": ["PASSED", "FAILED"] },
+    "overall_status": { "type": "string", "enum": ["VERIFIED", "REJECTED_REWORK_NEEDED"] },
+    "verification_timestamp": { "type": "string" }
+  },
+  "required": ["vulnerability_id", "original_exploit", "regression_test", "legitimate_behavior", "overall_status", "verification_timestamp"]
+}

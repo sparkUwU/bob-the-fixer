@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PatchResult",
+  "type": "object",
+  "properties": {
+    "vulnerability_id": { "type": "string" },
+    "root_cause": { "type": "string" },
+    "files_changed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "fix_description": { "type": "string" },
+    "regression_test_file": { "type": "string" },
+    "status": { "type": "string", "enum": ["PATCHED", "FAILED", "PARTIAL"] }
+  },
+  "required": ["vulnerability_id", "root_cause", "files_changed", "fix_description", "regression_test_file", "status"]
+}

@@ -1,0 +1,10 @@
+{
+  "vulnerability_id": "VULN-001",
+  "root_cause": "Missing ownership validation check in /api/transactions/<id> controller.",
+  "files_changed": [
+    "mock_target_app/app.py"
+  ],
+  "fix_description": "Added owner_id != current_user_id check to block unauthorized access to transaction records.",
+  "regression_test_file": "blue_team/tests/test_regression_vuln-001.py",
+  "status": "PATCHED"
+}

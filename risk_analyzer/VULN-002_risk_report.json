@@ -1,0 +1,9 @@
+{
+  "vulnerability_id": "VULN-002",
+  "priority": "CRITICAL",
+  "risk_score": 9.8,
+  "exploitability": "Extreme - Unauthenticated parameter injection",
+  "business_impact": "Critical - Complete database exfiltration or corruption possible",
+  "required_privilege": "Unauthenticated Public Access",
+  "remediation_urgency": "Immediate (Emergency Patch)"
+}

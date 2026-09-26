@@ -1,0 +1,10 @@
+{
+  "vulnerability_id": "VULN-002",
+  "root_cause": "Raw string formatting in SQL search query in /api/transactions/search controller.",
+  "files_changed": [
+    "mock_target_app/app.py"
+  ],
+  "fix_description": "Replaced formatted inline query string with parameterized query tuple.",
+  "regression_test_file": "blue_team/tests/test_regression_vuln-002.py",
+  "status": "PATCHED"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JudgeResult",
+  "type": "object",
+  "properties": {
+    "vulnerability_id": { "type": "string" },
+    "validation_status": { 
+      "type": "string", 
+      "enum": ["CONFIRMED", "FALSE_POSITIVE", "INSUFFICIENT_EVIDENCE"] 
+    },
+    "security_impact_verified": { "type": "boolean" },
+    "reproduction_log": { "type": "string" },
+    "reasoning": { "type": "string" },
+    "validated_at": { "type": "string" }
+  },
+  "required": ["vulnerability_id", "validation_status", "security_impact_verified", "reproduction_log", "reasoning", "validated_at"]
+}
