@@ -21,11 +21,10 @@ from verifier.verification_engine import VerificationEngine
 from red_team.attacks.adaptive_reattack import AdaptiveRedTeam
 
 def reset_patch_config():
-    config_path = os.path.join(os.path.dirname(__file__), "mock_target_app", "patch_config.json")
-    with open(config_path, "w") as f:
-        json.dump({"IDOR_FIXED": False, "SQLI_FIXED": False, "XSS_FIXED": False}, f, indent=2)
+    # Helper retained for compatibility
+    pass
 
-def is_server_running(url="http://127.0.0.1:5000/health"):
+def is_server_running(url="http://127.0.0.1:3000/health"):
     try:
         with urllib.request.urlopen(url) as resp:
             return resp.getcode() == 200
@@ -38,17 +37,13 @@ def main():
     print(" Autonomous Red Team vs Blue Team Security Loop")
     print("=" * 80)
 
-    reset_patch_config()
-
-    # Ensure mock server is active
+    # Ensure target server is active
     server_process = None
     if not is_server_running():
-        print("[+] Starting Mock Target App (SecureBank) server on http://127.0.0.1:5000...")
-        app_path = os.path.join(os.path.dirname(__file__), "mock_target_app", "app.py")
-        server_process = subprocess.Popen([sys.executable, app_path])
-        time.sleep(2) # Give server time to bind
+        print("[!] Target App (SecureBank) server on http://127.0.0.1:3000 is not detected.")
+        print("[!] Please start the target_app backend server (e.g., 'npm run dev' inside target_app).")
 
-    target_url = "http://127.0.0.1:5000"
+    target_url = "http://127.0.0.1:3000"
 
     try:
         # STEP 1: RECON

@@ -7,7 +7,7 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 class BlueTeamPatchAgent:
-    def __init__(self, target_base_url="http://127.0.0.1:5000"):
+    def __init__(self, target_base_url="http://127.0.0.1:3000"):
         self.target_base_url = target_base_url.rstrip("/")
 
     def apply_patch(self, finding_data):
@@ -20,20 +20,20 @@ class BlueTeamPatchAgent:
             root_cause = "Missing ownership validation check in /api/transactions/<id> controller."
             fix_desc = "Added owner_id != current_user_id check to block unauthorized access to transaction records."
             patch_key = "IDOR_FIXED"
-            target_file = "mock_target_app/app.py"
+            target_file = "target_app/backend/src/controllers/transaction.ts"
         elif v_type == "SQLI":
             root_cause = "Raw string formatting in SQL search query in /api/transactions/search controller."
             fix_desc = "Replaced formatted inline query string with parameterized query tuple."
             patch_key = "SQLI_FIXED"
-            target_file = "mock_target_app/app.py"
+            target_file = "target_app/backend/src/controllers/transaction.ts"
         else:
             root_cause = "Unsanitized user input."
             fix_desc = "Sanitized input."
             patch_key = "XSS_FIXED"
-            target_file = "mock_target_app/app.py"
+            target_file = "target_app/backend/src/controllers/transaction.ts"
 
-        # Read current patch config from mock server or patch config directly
-        config_path = os.path.join(os.path.dirname(__file__), "..", "..", "mock_target_app", "patch_config.json")
+        # Read current patch config or target app config directly
+        config_path = os.path.join(os.path.dirname(__file__), "..", "..", "target_app", "patch_config.json")
         current_config = {}
         if os.path.exists(config_path):
             with open(config_path, "r") as f:
@@ -77,7 +77,7 @@ import json
 
 def test_{vuln_id.lower()}_exploit_blocked():
     """Verifies original exploit is blocked post-patch."""
-    url = "http://127.0.0.1:5000/api/transactions/2"
+    url = "http://127.0.0.1:3000/api/transactions/2"
     headers = {{"X-User-ID": "101"}}
     req = urllib.request.Request(url, headers=headers)
     try:

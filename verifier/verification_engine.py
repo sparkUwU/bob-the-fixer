@@ -9,7 +9,7 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 class VerificationEngine:
-    def __init__(self, target_base_url="http://127.0.0.1:5000"):
+    def __init__(self, target_base_url="http://127.0.0.1:3000"):
         self.target_base_url = target_base_url.rstrip("/")
 
     def verify_patch(self, finding_data, patch_result):
