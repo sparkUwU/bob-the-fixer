@@ -1,0 +1,10 @@
+{
+  "vulnerability_id": "VULN-003",
+  "root_cause": "Unsanitized description input stored in createTransfer (target_app/backend/src/controllers/transfer.ts).",
+  "files_changed": [
+    "target_app/backend/src/controllers/transfer.ts"
+  ],
+  "fix_description": "Sanitized description input by escaping HTML tags before storage.",
+  "regression_test_file": "blue_team/tests/test_regression_vuln-003.py",
+  "status": "PATCHED"
+}

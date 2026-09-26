@@ -1,20 +1,25 @@
 # Auto-generated Regression Test for VULN-002 (SQLI)
 import urllib.request
-import urllib.parse
 import json
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
+from shared.auth_helper import get_session_cookie
 
 def test_vuln-002_exploit_blocked():
     """Verifies original exploit is blocked post-patch."""
-    url = "http://127.0.0.1:5000/api/transactions/2"
-    headers = {"X-User-ID": "101"}
+    cookie = get_session_cookie("http://127.0.0.1:3000", "Alice", "password123")
+    url = "http://127.0.0.1:3000/api/users/2"
+    headers = {"Cookie": cookie}
     req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req) as resp:
             data = json.loads(resp.read().decode())
-            assert data.get("user_id") != 102, "IDOR Exploit still accessible!"
+            assert data.get("user", {}).get("username") != "Bob", f"Exploit VULN-002 still accessible!"
     except urllib.error.HTTPError as e:
-        assert e.code == 403, f"Expected 403 Forbidden, got {e.code}"
-        print("[✓ REGRESSION TEST PASSED] Exploit correctly blocked with HTTP 403!")
+        assert e.code in (403, 400, 401), f"Expected blocked status, got {e.code}"
+        print(f"[✓ REGRESSION TEST PASSED] VULN-002 exploit blocked with HTTP {e.code}!")
 
 if __name__ == "__main__":
     test_vuln-002_exploit_blocked()

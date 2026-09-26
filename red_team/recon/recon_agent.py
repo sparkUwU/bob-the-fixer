@@ -49,18 +49,39 @@ class ReconAgent:
             "static_express_routes": static_express_routes,
             "endpoints": [
                 {
-                    "path": "/api/transactions/2",
+                    "path": "/api/users/2",
                     "method": "GET",
-                    "auth_header": "X-User-ID",
-                    "description": "Fetch user transaction by ID",
-                    "category": "IDOR"
+                    "description": "Fetch user profile by ID (IDOR / BOLA)",
+                    "category": "IDOR",
+                    "id": "VULN-001"
                 },
                 {
-                    "path": "/api/transactions/search?q=deposit",
+                    "path": "/api/transactions/search?q=",
                     "method": "GET",
-                    "auth_header": None,
-                    "description": "Search transactions by description query",
-                    "category": "SQLI"
+                    "description": "Search transactions by description (SQL Injection)",
+                    "category": "SQLI",
+                    "id": "VULN-002"
+                },
+                {
+                    "path": "/api/transfers",
+                    "method": "POST",
+                    "description": "Submit money transfer with memo (Stored XSS)",
+                    "category": "XSS",
+                    "id": "VULN-003"
+                },
+                {
+                    "path": "/api/profile/upload",
+                    "method": "POST",
+                    "description": "Upload user profile avatar/file (Unsafe File Upload)",
+                    "category": "FILE_UPLOAD",
+                    "id": "VULN-004"
+                },
+                {
+                    "path": "/api/admin/users",
+                    "method": "GET",
+                    "description": "Access admin user directory (Broken Admin Auth)",
+                    "category": "PRIVILEGE_ESCALATION",
+                    "id": "VULN-005"
                 }
             ]
         }

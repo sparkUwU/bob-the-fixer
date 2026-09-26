@@ -1,22 +1,22 @@
 {
   "id": "VULN-001",
   "type": "IDOR",
-  "endpoint": "/api/transactions/2",
+  "endpoint": "/api/users/2",
   "http_method": "GET",
   "severity": "high",
-  "description": "User 101 can access User 102 transaction history (Broken Object Level Authorization).",
+  "description": "Authenticated user can access another user's profile data via ID manipulation.",
   "reproduction": {
     "headers": {
-      "X-User-ID": "101"
+      "Cookie": "session_token=5c0c1a8b5aaa640db6843ef80dab0f1541a32f6a4ea673af048fd9586163d207"
     },
     "payload": {},
     "url_params": {},
-    "test_user": "101"
+    "test_user": "Alice"
   },
   "evidence": {
     "status_code": 200,
-    "response_body": "{\"id\": 2, \"user_id\": 102, \"amount\": 1200.0, \"description\": \"Secret Offshore Transfer\"}",
-    "extracted_data": "Exfiltrated transaction for user 102: amount $1200.0"
+    "response_body": "{\"user\":{\"id\":2,\"username\":\"Bob\",\"email\":\"bob@securebank.local\",\"role\":\"USER\",\"created_at\":\"2026-09-26 17:14:47\"}}",
+    "extracted_data": "Exfiltrated profile for user Bob: email bob@securebank.local"
   },
-  "timestamp": "2026-09-26T20:14:31.528902Z"
+  "timestamp": "2026-09-26T23:16:03.637483Z"
 }

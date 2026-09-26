@@ -1,0 +1,9 @@
+{
+  "vulnerability_id": "VULN-004",
+  "priority": "MEDIUM",
+  "risk_score": 5.5,
+  "exploitability": "Moderate",
+  "business_impact": "Moderate",
+  "required_privilege": "Authenticated User",
+  "remediation_urgency": "Standard Sprint Cycle"
+}

@@ -1,0 +1,10 @@
+{
+  "vulnerability_id": "VULN-005",
+  "root_cause": "Client-supplied X-Admin-Override header bypass in requireAdmin middleware (target_app/backend/src/controllers/admin.ts).",
+  "files_changed": [
+    "target_app/backend/src/controllers/admin.ts"
+  ],
+  "fix_description": "Removed client header override block to enforce strict server-side role-based authorization.",
+  "regression_test_file": "blue_team/tests/test_regression_vuln-005.py",
+  "status": "PATCHED"
+}

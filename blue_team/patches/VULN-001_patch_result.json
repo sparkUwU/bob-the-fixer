@@ -1,10 +1,10 @@
 {
   "vulnerability_id": "VULN-001",
-  "root_cause": "Missing ownership validation check in /api/transactions/<id> controller.",
+  "root_cause": "Authorization check disabled in getProfile controller (target_app/backend/src/controllers/user.ts).",
   "files_changed": [
-    "mock_target_app/app.py"
+    "target_app/backend/src/controllers/user.ts"
   ],
-  "fix_description": "Added owner_id != current_user_id check to block unauthorized access to transaction records.",
+  "fix_description": "Enforced req.user.id !== userId check to return 403 Forbidden for unauthorized profile requests.",
   "regression_test_file": "blue_team/tests/test_regression_vuln-001.py",
   "status": "PATCHED"
 }

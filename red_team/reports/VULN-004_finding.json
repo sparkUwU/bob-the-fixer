@@ -1,0 +1,25 @@
+{
+  "id": "VULN-004",
+  "type": "FILE_UPLOAD",
+  "endpoint": "/api/profile/upload",
+  "http_method": "POST",
+  "severity": "high",
+  "description": "Server lacks file extension allowlist, permitting HTML file uploads.",
+  "reproduction": {
+    "headers": {
+      "Cookie": "session_token=5c0c1a8b5aaa640db6843ef80dab0f1541a32f6a4ea673af048fd9586163d207",
+      "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+    },
+    "payload": {
+      "filename": "test-malicious.html"
+    },
+    "url_params": {},
+    "test_user": "Alice"
+  },
+  "evidence": {
+    "status_code": 200,
+    "response_body": "{\"message\":\"File uploaded successfully\",\"file\":{\"original_name\":\"test-malicious.html\",\"stored_name\":\"1790464563653-test-malicious.html\",\"size\":34,\"mimetype\":\"text/html\"}}",
+    "extracted_data": "Uploaded file 1790464563653-test-malicious.html"
+  },
+  "timestamp": "2026-09-26T23:16:03.659879Z"
+}

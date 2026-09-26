@@ -60,8 +60,11 @@ def main():
         red_engine = RedTeamAttackEngine(target_url)
         idor_finding = red_engine.run_idor_attack()
         sqli_finding = red_engine.run_sqli_attack()
+        xss_finding = red_engine.run_xss_attack()
+        upload_finding = red_engine.run_file_upload_attack()
+        admin_finding = red_engine.run_admin_escalation_attack()
 
-        findings = [f for f in [idor_finding, sqli_finding] if f is not None]
+        findings = [f for f in [idor_finding, sqli_finding, xss_finding, upload_finding, admin_finding] if f is not None]
 
         if not findings:
             print("[!] No vulnerabilities discovered.")
