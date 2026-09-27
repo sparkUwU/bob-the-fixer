@@ -13,14 +13,15 @@ from pathlib import Path
 from datetime import datetime
 
 # Flask
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request, Response, send_from_directory
 from flask_cors import CORS
 
 # Ensure workspace root is importable
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
 
-app = Flask(__name__)
+DIST_DIR = Path(__file__).parent / "dist"
+app = Flask(__name__, static_folder=None)
 CORS(app)
 
 # ── State ──────────────────────────────────────────────────────────────────────
@@ -338,6 +339,24 @@ def metrics():
     })
 
 
+# ── Static UI Serving (Production) ────────────────────────────────────────────
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_frontend(path):
+    if path.startswith("api/"):
+        return jsonify({"error": "Endpoint not found"}), 404
+    target = DIST_DIR / path
+    if path != "" and target.is_file():
+        return send_from_directory(str(DIST_DIR), path)
+    index_file = DIST_DIR / "index.html"
+    if index_file.is_file():
+        return send_from_directory(str(DIST_DIR), "index.html")
+    return jsonify({
+        "message": "SecureBank Dashboard API running. Build frontend with 'npm run build' inside dashboard/ to serve the UI."
+    })
+
+
 if __name__ == "__main__":
-    print("SecureBank Dashboard API → http://localhost:5050")
-    app.run(host="0.0.0.0", port=5050, debug=False, threaded=True)
+    port = int(os.environ.get("PORT", 5050))
+    print(f"SecureBank Dashboard API starting on port {port}...")
+    app.run(host="0.0.0.0", port=port, debug=False, threaded=True)
