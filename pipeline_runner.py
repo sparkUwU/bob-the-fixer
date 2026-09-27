@@ -1,3 +1,10 @@
+"""
+[DEPRECATED / UNUSED]
+This script is excluded from the system architecture.
+All operations are executed directly by autonomous BOB AI Agents 
+via the UI-to-IDE bridge file (instruction.json) and disk JSON report artifacts.
+"""
+
 import os
 import sys
 import time
@@ -45,13 +52,29 @@ def main():
 
     target_url = "http://127.0.0.1:3000"
 
+    # Check for workspace instruction.json bridge
+    instruction_path = os.path.join(os.path.dirname(__file__), "instruction.json")
+    instruction_data = None
+    if os.path.exists(instruction_path):
+        try:
+            with open(instruction_path, "r", encoding="utf-8") as f:
+                instruction_data = json.load(f)
+            if instruction_data and instruction_data.get("status") == "PENDING":
+                print(f"[🤖 BRIDGE] Received pending directive: {instruction_data.get('directive')}")
+                instruction_data["status"] = "RUNNING"
+                with open(instruction_path, "w", encoding="utf-8") as f:
+                    json.dump(instruction_data, f, indent=2)
+        except Exception as e:
+            print(f"[!] Error reading instruction.json: {e}")
+
     try:
         # STEP 1: RECON
         print("\n" + "-"*50)
         print("STAGE 1: [RECON] RECONNAISSANCE")
         print("-"*50)
+        target_app_dir = os.path.join(os.path.dirname(__file__), "target_app")
         recon = ReconAgent(target_url)
-        recon_data = recon.discover_attack_surface()
+        recon_data = recon.discover_attack_surface(target_app_dir=target_app_dir)
 
         # STEP 2: RED TEAM ATTACK
         print("\n" + "-"*50)
@@ -68,6 +91,10 @@ def main():
 
         if not findings:
             print("[!] No vulnerabilities discovered.")
+            if instruction_data:
+                instruction_data["status"] = "COMPLETED"
+                with open(instruction_path, "w", encoding="utf-8") as f:
+                    json.dump(instruction_data, f, indent=2)
             return
 
         # Process each confirmed vulnerability through the closed loop
@@ -126,6 +153,11 @@ def main():
             print(f" * Verification:      {verify_res['overall_status']} (Original Exploit: {verify_res['original_exploit']})")
             print(f" * Adaptive Re-attack:{'NEW PATH DISCOVERED' if reattack_res['new_attack_found'] else 'DEFENSE VERIFIED & SECURE'}")
             print("*"*60)
+
+        if instruction_data:
+            instruction_data["status"] = "COMPLETED"
+            with open(instruction_path, "w", encoding="utf-8") as f:
+                json.dump(instruction_data, f, indent=2)
 
     finally:
         if server_process:
