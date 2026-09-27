@@ -3,7 +3,7 @@ import sys
 import json
 import sqlite3
 import urllib.parse
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import HTTPServer, BaseHTTPRequestHandler, ThreadingHTTPServer
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
@@ -139,20 +139,21 @@ class MockBankHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         pass
 
-class ReusableHTTPServer(HTTPServer):
+class ReusableThreadingHTTPServer(ThreadingHTTPServer):
     allow_reuse_address = True
+    daemon_threads = True
 
 def run_server(port=3000):
     server_address = ('127.0.0.1', port)
     try:
-        httpd = ReusableHTTPServer(server_address, MockBankHandler)
+        httpd = ReusableThreadingHTTPServer(server_address, MockBankHandler)
         print(f"[+] Mock Target App listening on http://127.0.0.1:{port}")
         httpd.serve_forever()
     except OSError as e:
         if e.errno in (98, 10048):
             print(f"[!] Target server already active on port {port}.")
         else:
-            raise
+            print(f"[!] Target server error: {e}")
 
 if __name__ == "__main__":
     port = int(os.environ.get("TARGET_PORT", 3000))
