@@ -13,7 +13,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Flask
-from flask import Flask, jsonify, request, Response, send_from_directory
+from flask import Flask, jsonify, Response, send_from_directory
 from flask_cors import CORS
 
 # Ensure workspace root is importable
