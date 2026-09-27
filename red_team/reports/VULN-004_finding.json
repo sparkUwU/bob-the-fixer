@@ -7,7 +7,7 @@
   "description": "Server lacks file extension allowlist, permitting HTML file uploads.",
   "reproduction": {
     "headers": {
-      "Cookie": "session_token=3a796c1a9bed672a242bf732a8e68bfce57fae1912e93023185eb15008b82410",
+      "Cookie": "session_token=mock_alice_session_123",
       "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
     },
     "payload": {
@@ -18,8 +18,8 @@
   },
   "evidence": {
     "status_code": 200,
-    "response_body": "{\"message\":\"File uploaded successfully\",\"file\":{\"original_name\":\"test-malicious.html\",\"stored_name\":\"1790513429739-test-malicious.html\",\"size\":34,\"mimetype\":\"text/html\"}}",
-    "extracted_data": "Uploaded file 1790513429739-test-malicious.html"
+    "response_body": "{\"file\": {\"original_name\": \"test-malicious.html\", \"stored_name\": \"upload_99.html\"}}",
+    "extracted_data": "Uploaded file upload_99.html"
   },
-  "timestamp": "2026-09-27T12:50:29.746088Z"
+  "timestamp": "2026-09-27T14:47:25.428674Z"
 }

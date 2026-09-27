@@ -1,10 +1,8 @@
 {
   "vulnerability_id": "VULN-005",
   "root_cause": "Client header override block in requireAdmin middleware.",
-  "files_changed": [
-    "target_app/backend/src/controllers/admin.ts"
-  ],
+  "files_changed": [],
   "fix_description": "Removed client header override to enforce strict role-based access control.",
   "regression_test_file": "blue_team/tests/test_regression_vuln-005.py",
-  "status": "PATCHED"
+  "status": "FAILED"
 }

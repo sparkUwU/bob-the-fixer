@@ -2,7 +2,7 @@
   "vulnerability_id": "VULN-001",
   "original_exploit": "SUCCESSFUL",
   "regression_test": "FAILED",
-  "legitimate_behavior": "PASSED",
+  "legitimate_behavior": "FAILED",
   "overall_status": "REJECTED_REWORK_NEEDED",
-  "verification_timestamp": "2026-09-27T12:50:29.775768Z"
+  "verification_timestamp": "2026-09-27T14:47:25.440803Z"
 }

@@ -7,7 +7,7 @@
   "description": "Unsanitized transfer memo enables Stored XSS script execution.",
   "reproduction": {
     "headers": {
-      "Cookie": "session_token=3a796c1a9bed672a242bf732a8e68bfce57fae1912e93023185eb15008b82410",
+      "Cookie": "session_token=mock_alice_session_123",
       "Content-Type": "application/json"
     },
     "payload": {
@@ -20,8 +20,8 @@
   },
   "evidence": {
     "status_code": 200,
-    "response_body": "{\"message\":\"Transfer successful\"}",
+    "response_body": "{\"status\": \"success\", \"message\": \"Transfer submitted\"}",
     "extracted_data": "Payload '<img src=x onerror=...>' stored without sanitization."
   },
-  "timestamp": "2026-09-27T12:50:29.736495Z"
+  "timestamp": "2026-09-27T14:47:25.427732Z"
 }

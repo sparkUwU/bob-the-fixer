@@ -1,10 +1,8 @@
 {
   "vulnerability_id": "VULN-002",
   "root_cause": "Raw string query concatenation in searchTransactions controller.",
-  "files_changed": [
-    "target_app/backend/src/controllers/transaction.ts"
-  ],
+  "files_changed": [],
   "fix_description": "Replaced concatenated query string with parameterized query placeholders.",
   "regression_test_file": "blue_team/tests/test_regression_vuln-002.py",
-  "status": "PATCHED"
+  "status": "FAILED"
 }

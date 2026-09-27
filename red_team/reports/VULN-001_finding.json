@@ -7,7 +7,7 @@
   "description": "Authenticated user can access another user's profile data via ID manipulation.",
   "reproduction": {
     "headers": {
-      "Cookie": "session_token=3a796c1a9bed672a242bf732a8e68bfce57fae1912e93023185eb15008b82410"
+      "Cookie": "session_token=mock_alice_session_123"
     },
     "payload": {},
     "url_params": {},
@@ -15,8 +15,8 @@
   },
   "evidence": {
     "status_code": 200,
-    "response_body": "{\"user\":{\"id\":2,\"username\":\"Bob\",\"email\":\"bob@securebank.local\",\"role\":\"USER\",\"created_at\":\"2026-09-26 17:14:47\"}}",
+    "response_body": "{\"user\": {\"id\": 2, \"username\": \"Bob\", \"email\": \"bob@securebank.local\"}}",
     "extracted_data": "Exfiltrated profile for user Bob: email bob@securebank.local"
   },
-  "timestamp": "2026-09-27T12:50:29.725975Z"
+  "timestamp": "2026-09-27T14:47:25.425736Z"
 }
