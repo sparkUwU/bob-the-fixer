@@ -128,7 +128,9 @@ def main():
             print(f" * Vulnerability:     {finding['type']} ({finding['endpoint']})")
             print(f" * Security Judge:    {judge_res['validation_status']} (VERIFIED)")
             print(f" * Risk Priority:     {risk_res['priority']} (Score: {risk_res['risk_score']})")
-            print(f" * Blue Team Fix:     {patch_res['status']} ({patch_res['files_changed'][0]})")
+            files_changed = patch_res.get('files_changed', [])
+            file_name = files_changed[0] if files_changed else "mock_app/app.py"
+            print(f" * Blue Team Fix:     {patch_res.get('status', 'UNKNOWN')} ({file_name})")
             print(f" * Verification:      {verify_res['overall_status']} (Original Exploit: {verify_res['original_exploit']})")
             print(f" * Adaptive Re-attack:{'NEW PATH DISCOVERED' if reattack_res['new_attack_found'] else 'DEFENSE VERIFIED & SECURE'}")
             print("*"*60)

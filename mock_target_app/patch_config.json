@@ -1,5 +1,7 @@
 {
-  "IDOR_FIXED": true,
-  "SQLI_FIXED": true,
-  "XSS_FIXED": false
+  "IDOR_FIXED": false,
+  "SQLI_FIXED": false,
+  "XSS_FIXED": false,
+  "FILE_UPLOAD_FIXED": false,
+  "PRIV_FIXED": false
 }
