@@ -40,8 +40,14 @@ def main():
     # Ensure target server is active
     server_process = None
     if not is_server_running():
-        print("[!] Target App (SecureBank) server on http://127.0.0.1:3000 is not detected.")
-        print("[!] Please start the target_app backend server (e.g., 'npm run dev' inside target_app).")
+        mock_app = os.path.join(os.path.dirname(__file__), "mock_target_app", "app.py")
+        if os.path.exists(mock_app):
+            print("[+] Auto-starting Mock Target App server on http://127.0.0.1:3000...")
+            server_process = subprocess.Popen([sys.executable, mock_app])
+            time.sleep(2)
+        else:
+            print("[!] Target App (SecureBank) server on http://127.0.0.1:3000 is not detected.")
+            print("[!] Please start the target_app backend server (e.g., 'npm run dev' inside target_app).")
 
     target_url = "http://127.0.0.1:3000"
 

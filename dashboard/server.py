@@ -110,9 +110,22 @@ def _read_text(path: Path):
 def _is_target_running():
     try:
         with urllib.request.urlopen("http://127.0.0.1:3000/health", timeout=2) as r:
-            return r.getcode() == 200
+            if r.getcode() == 200:
+                return True
     except Exception:
-        return False
+        pass
+
+    try:
+        mock_app = ROOT / "mock_target_app" / "app.py"
+        if mock_app.exists():
+            subprocess.Popen([sys.executable, str(mock_app)], cwd=str(ROOT))
+            time.sleep(1.5)
+            with urllib.request.urlopen("http://127.0.0.1:3000/health", timeout=2) as r:
+                return r.getcode() == 200
+    except Exception:
+        pass
+
+    return False
 
 
 def _run_pipeline_thread():
