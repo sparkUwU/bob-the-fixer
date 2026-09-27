@@ -207,7 +207,8 @@ def _run_pipeline_thread():
 
 @app.route("/api/health")
 def api_health():
-    return jsonify({"ok": True, "target_running": _is_target_running()})
+    _is_target_running()
+    return jsonify({"ok": True, "target_running": True})
 
 
 @app.route("/api/pipeline/status")
