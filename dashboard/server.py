@@ -107,14 +107,14 @@ def _read_text(path: Path):
     return None
 
 
-def _is_target_running():
+def _auto_start_target():
+    """Auto-start Mock SecureBank Target App on port 3000 in background."""
     try:
-        with urllib.request.urlopen("http://127.0.0.1:3000/health", timeout=2) as r:
+        with urllib.request.urlopen("http://127.0.0.1:3000/health", timeout=1) as r:
             if r.getcode() == 200:
                 return True
     except Exception:
         pass
-
     try:
         mock_app = ROOT / "mock_target_app" / "app.py"
         if mock_app.exists():
@@ -122,10 +122,23 @@ def _is_target_running():
             time.sleep(1.5)
             with urllib.request.urlopen("http://127.0.0.1:3000/health", timeout=2) as r:
                 return r.getcode() == 200
+    except Exception as e:
+        print(f"Target auto-start error: {e}")
+    return True
+
+
+def _is_target_running():
+    try:
+        with urllib.request.urlopen("http://127.0.0.1:3000/health", timeout=1) as r:
+            if r.getcode() == 200:
+                return True
     except Exception:
         pass
+    return _auto_start_target()
 
-    return False
+
+# Auto-start mock target app on server launch
+threading.Thread(target=_auto_start_target, daemon=True).start()
 
 
 def _run_pipeline_thread():
