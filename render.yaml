@@ -4,7 +4,7 @@ services:
     env: python
     region: singapore
     plan: free
-    buildCommand: "cd dashboard && npm install && npm run build && pip install -r requirements.txt"
+    buildCommand: "cd dashboard && (chmod -R +x node_modules/.bin 2>/dev/null || true) && npm install && npx vite build && pip install -r requirements.txt"
     startCommand: "gunicorn --chdir dashboard server:app --bind 0.0.0.0:$PORT"
     envVars:
       - key: PYTHON_VERSION
