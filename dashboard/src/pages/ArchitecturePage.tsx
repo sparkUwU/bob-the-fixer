@@ -167,16 +167,18 @@ export function ArchitecturePage() {
           <div className="section-header">
             <div className="section-label">Parallel Agent Architecture</div>
             <h2>How the architecture scales</h2>
-            <p>The pipeline is designed to support parallel subagent execution for concurrent attack surface coverage.</p>
+            <p>Security work fans out to specialist subagents that probe different attack surfaces at the same time, then converges on the Security Judge.</p>
           </div>
-          <div style={{ padding: '2.5rem', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12 }}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <div style={{ padding: '2.5rem', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
               <div style={{ padding: '0.65rem 2rem', display: 'inline-block', background: 'rgba(59,130,246,.1)', border: '1px solid rgba(59,130,246,.3)', borderRadius: 8, fontWeight: 700, color: '#60a5fa', fontSize: '0.9rem' }}>
                 SECURITY MISSION
               </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.5rem', gap: '4rem' }}>
-              <div style={{ width: 2, height: 24, background: 'var(--border2)', marginLeft: -2 }} />
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <div style={{ width: 2, height: 16, background: 'var(--border2)' }} />
+              <div style={{ fontSize: '0.75rem', color: '#94a3b8', textTransform: 'lowercase', letterSpacing: '0.05em', margin: '0.2rem 0' }}>parallel</div>
+              <div style={{ width: 2, height: 16, background: 'var(--border2)' }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
               {['API Agent', 'Auth Agent', 'Config Agent'].map((agent, i) => (
@@ -191,8 +193,9 @@ export function ArchitecturePage() {
                 Security Judge
               </div>
             </div>
-            <div style={{ textAlign: 'center', padding: '0.75rem 1.5rem', background: 'rgba(245,158,11,.06)', border: '1px solid rgba(245,158,11,.2)', borderRadius: 8, display: 'inline-block', fontSize: '0.82rem', color: '#d97706', margin: '0 auto' }}>
-              ⚠️ Parallel execution is an architectural capability. The current pipeline runs sequentially per vulnerability.
+            <div style={{ padding: '1rem 1.25rem', background: 'rgba(59,130,246,.08)', border: '1px solid rgba(59,130,246,.3)', borderRadius: 8, fontSize: '0.85rem', color: '#93c5fd', textAlign: 'left', maxWidth: 680, margin: '0 auto' }}>
+              <div style={{ fontWeight: 700, marginBottom: '0.35rem', color: '#60a5fa' }}>Parallel subagents in action</div>
+              <div>In the IBM Bob agent run, Phase 2 launches five specialist Red Team subagents simultaneously (SQL injection, authorization/IDOR, stored XSS, file upload and admin escalation) before the Security Judge validates their combined findings. This dashboard's local pipeline replays the same seven stages in order, one vulnerability at a time.</div>
             </div>
           </div>
         </div>
@@ -204,9 +207,10 @@ export function ArchitecturePage() {
           <div className="grid-3">
             {[
               { title: 'Agent Workflow',      desc: 'Seven specialized agents coordinated in sequence, each consuming the previous agent\'s output.' },
-              { title: 'Document Understanding', desc: 'Agents consume project documentation to build context-aware attack strategies.' },
+              { title: 'Document Understanding', desc: 'Agents can use project documentation as context to build targeted attack strategies.' },
               { title: 'Developer Integration', desc: 'The pipeline produces actionable findings that feed directly into the developer\'s workflow.' },
             ].map(item => (
+
               <div key={item.title} style={{ padding: '1rem', background: 'rgba(15,23,42,.5)', borderRadius: 8, border: '1px solid rgba(59,130,246,.2)' }}>
                 <h4 style={{ marginBottom: '0.5rem', color: '#60a5fa' }}>{item.title}</h4>
                 <p style={{ fontSize: '0.85rem' }}>{item.desc}</p>
