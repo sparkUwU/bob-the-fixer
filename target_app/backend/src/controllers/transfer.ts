@@ -25,7 +25,8 @@ export const createTransfer = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Cannot transfer to the same account' });
     }
 
-    await transferFunds(fromAccount.id, toAccount.id, amount, description || 'Transfer');
+    const cleanDesc = description ? description.replace(/</g, '&lt;').replace(/>/g, '&gt;') : 'Transfer';
+    await transferFunds(fromAccount.id, toAccount.id, amount, cleanDesc);
 
     res.json({ message: 'Transfer successful' });
   } catch (error: any) {

@@ -1,10 +1,10 @@
 {
   "vulnerability_id": "VULN-004",
-  "root_cause": "No file extension allowlist validation in uploadProfileFile (target_app/backend/src/controllers/upload.ts).",
+  "root_cause": "Missing extension allowlist check in uploadProfileFile.",
   "files_changed": [
     "target_app/backend/src/controllers/upload.ts"
   ],
-  "fix_description": "Added file extension validation rejecting .html, .svg, and executable file uploads.",
+  "fix_description": "Added file extension validation rejecting script and executable formats.",
   "regression_test_file": "blue_team/tests/test_regression_vuln-004.py",
   "status": "PATCHED"
 }

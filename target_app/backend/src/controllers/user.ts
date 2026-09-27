@@ -7,9 +7,9 @@ export const getProfile = async (req: Request, res: Response) => {
     
     // VULN-001: Insecure Direct Object Reference (IDOR)
     // Authorization check intentionally disabled
-    // if (req.user!.id !== userId && req.user!.role !== 'ADMIN') {
-    //   return res.status(403).json({ error: 'Forbidden' });
-    // }
+    if (req.user!.id !== userId && req.user!.role !== 'ADMIN') {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
 
     const user = await getUserById(userId);
     if (!user) {

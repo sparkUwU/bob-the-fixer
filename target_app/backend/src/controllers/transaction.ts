@@ -60,11 +60,11 @@ export const searchTransactions = async (req: Request, res: Response) => {
     const db = getDb();
     const sql = `
       SELECT * FROM transactions 
-      WHERE (from_account_id = ${account.id} OR to_account_id = ${account.id}) 
-      AND description LIKE '%${query}%'
+      WHERE (from_account_id = ? OR to_account_id = ?)
+      AND description LIKE ?
     `;
 
-    db.all(sql, [], (err, rows) => {
+    db.all(sql, [account.id, account.id, `%${query}%`], (err, rows) => {
       db.close();
       if (err) {
         return res.status(500).json({ error: 'Database error', details: err.message });

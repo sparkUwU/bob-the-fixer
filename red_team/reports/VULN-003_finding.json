@@ -7,7 +7,7 @@
   "description": "Unsanitized transfer memo enables Stored XSS script execution.",
   "reproduction": {
     "headers": {
-      "Cookie": "session_token=5c0c1a8b5aaa640db6843ef80dab0f1541a32f6a4ea673af048fd9586163d207",
+      "Cookie": "session_token=3a796c1a9bed672a242bf732a8e68bfce57fae1912e93023185eb15008b82410",
       "Content-Type": "application/json"
     },
     "payload": {
@@ -23,5 +23,5 @@
     "response_body": "{\"message\":\"Transfer successful\"}",
     "extracted_data": "Payload '<img src=x onerror=...>' stored without sanitization."
   },
-  "timestamp": "2026-09-26T23:16:03.649631Z"
+  "timestamp": "2026-09-27T12:50:29.736495Z"
 }

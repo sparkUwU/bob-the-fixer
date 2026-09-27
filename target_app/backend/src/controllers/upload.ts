@@ -40,6 +40,9 @@ export const uploadProfileFile = (req: Request, res: Response) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
+  if (req.file.originalname.match(/\.(html|htm|svg|exe|sh)$/i)) {
+    return res.status(400).json({ error: 'Invalid file type' });
+  }
 
   // Record upload in database
   const db = getDb();

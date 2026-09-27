@@ -7,10 +7,7 @@ export const requireAdmin = (req: Request, res: Response, next: NextFunction) =>
   // The middleware trusts a client-supplied header to bypass the role check.
   // Any authenticated user who sends "X-Admin-Override: true" gains admin access.
   // Correct implementation: ONLY check req.user.role — never trust client headers for authz.
-  const overrideHeader = req.headers['x-admin-override'];
-  if (overrideHeader === 'true') {
-    return next(); // intentionally bypasses role check
-  }
+  // Client header override check removed for security
 
   if (!req.user || req.user.role !== 'ADMIN') {
     return res.status(403).json({ error: 'Admin access required' });

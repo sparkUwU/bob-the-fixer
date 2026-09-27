@@ -4,5 +4,5 @@
   "security_impact_verified": true,
   "reproduction_log": "Reproduction request to http://127.0.0.1:3000/api/transactions/search?q=%27+OR+1%3D1+-- returned HTTP 200.",
   "reasoning": "Independently verified SQL injection returned records outside user's account.",
-  "validated_at": "2026-09-26T23:16:03.704536Z"
+  "validated_at": "2026-09-27T12:50:29.789575Z"
 }

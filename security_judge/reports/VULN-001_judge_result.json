@@ -4,5 +4,5 @@
   "security_impact_verified": true,
   "reproduction_log": "Reproduction request to http://127.0.0.1:3000/api/users/2 returned HTTP 200.",
   "reasoning": "Independently verified that Alice received Bob's sensitive profile data.",
-  "validated_at": "2026-09-26T23:16:03.672043Z"
+  "validated_at": "2026-09-27T12:50:29.755449Z"
 }
